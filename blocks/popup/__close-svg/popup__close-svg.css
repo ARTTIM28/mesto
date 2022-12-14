@@ -1,0 +1,6 @@
+.popup__close-svg {
+  margin: auto;
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+}
