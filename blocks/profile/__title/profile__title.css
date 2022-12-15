@@ -3,20 +3,22 @@
   max-width: 295px;
   padding-right: 17px;
   padding-bottom: 10px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  word-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 650px) {
   .profile__title {
     padding: 0;
+    padding-left: 28px;
     font-size: 27px;
     line-height: 33px;
-    width: auto;
-    margin: 0;
+    max-width: 189px;
   }
 }

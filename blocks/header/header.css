@@ -1,5 +1,7 @@
 .header {
+  box-sizing: border-box;
   margin: 45px auto 40px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -7,13 +9,13 @@
   align-items: flex-start;
   max-width: 880px;
   width: 100%;
-  height: 74px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (max-width: 650px) {
   .header {
-    margin: 28px auto 38.25px;
+    margin: 28px auto 0;
+    padding-bottom: 30px;
     max-width: 320px;
-    height: 56px;
   }
 }
