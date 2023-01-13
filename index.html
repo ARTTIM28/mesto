@@ -26,55 +26,24 @@
     </section>
     <section class="photo-grid">
       <ul class="photo-grid__items">
-        <li class="photo-grid__item">
-          <img class="photo-grid__photo" src="./images/облака.jpeg" alt="Фото - Полет в облаках">
-          <div class="photo-grid__group">
-            <h2 class="photo-grid__text">Лечу в рейс</h2>
-            <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__photo" src="./images/италия.jpeg" alt="Фото - Италия">
-          <div class="photo-grid__group">
-            <h2 class="photo-grid__text">Италия</h2>
-            <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__photo" src="./images/канада.jpeg" alt="Фото - Канада">
-          <div class="photo-grid__group">
-            <h2 class="photo-grid__text">Канада</h2>
-            <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__photo" src="./images/маями.jpeg" alt="Фото - Майами">
-          <div class="photo-grid__group">
-            <h2 class="photo-grid__text">Майами</h2>
-            <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__photo" src="./images/порт.jpeg" alt="Фото - В порту">
-          <div class="photo-grid__group">
-            <h2 class="photo-grid__text">В порту</h2>
-            <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
-          </div>
-        </li>
-        <li class="photo-grid__item">
-          <img class="photo-grid__photo" src="./images/португалия.jpeg" alt="Фото - Португалия">
-          <div class="photo-grid__group">
-            <h2 class="photo-grid__text">Португалия</h2>
-            <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
-          </div>
-        </li>
+
       </ul>
     </section>
+    <template id = photo-grid>
+      <li class="photo-grid__item">
+        <img class="photo-grid__photo" alt="Фото">
+        <img class="photo-grid__trash" src="./images/Trash.svg" alt="Удалить">
+        <div class="photo-grid__group">
+          <h2 class="photo-grid__text"></h2>
+          <button type="button" class="photo-grid__button"><img class="photo-grid__element" src="./images/like.svg" alt="Поставить лаййк"></button>
+        </div>
+      </li>
+    </template>
   </main>
   <footer class="footer">
     <p class="footer__author">&copy; 2022. Григорьев Артем</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup_name_profile">
     <div class="popup__container">
       <button type="button" class="popup__close-button">
         <img class="popup__close-svg" src="./images/Close-Icon.svg" alt="закрыть">
@@ -85,6 +54,20 @@
         <input type="text" name="jobInput" value="" class="popup__input popup__input_text_job">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
+    </div>
+  </div>
+    <div class="popup popup_name_card">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button">
+          <img class="popup__close-svg" src="./images/Close-Icon.svg" alt="закрыть">
+        </button>
+        <form name="formName" class="popup__form popup__form_newcard" action="#">
+          <h2 class="popup__header">Новое место</h2>
+          <input type="text" name="placeInput" placeholder="Название" class="popup__input popup__input_text_place">
+          <input type="text" name="linkInput" placeholder="Ссылка на картинку" class="popup__input popup__input_text_link">
+          <button type="submit" class="popup__save-button">Создать</button>
+        </form>
+      </div>
     </div>
   </div>
   <script src="./scripts/index.js"></script>

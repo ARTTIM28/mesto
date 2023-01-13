@@ -1,0 +1,9 @@
+.photo-grid__trash {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  max-width: 18px;
+  min-height: 19px;
+}
+
+
