@@ -51,6 +51,8 @@ function createCards({ name, link }) {
   const cardImage = card.querySelector('.photo-grid__photo');
   cardImage.src = link;
 
+  addCardEventListener(card);
+
   return card;
 }
 
@@ -62,6 +64,7 @@ function renderCards() {
 }
 
 renderCards()
+
 
 // Добавить новую карточку
 
@@ -86,9 +89,18 @@ function newCardFormSubmit(evt) {
   closePopup(cardPopup);
 }
 
+// Функция удаления карточки
+function deleteCard(evt) {
+  evt.target.closest('.photo-grid__item').remove();
+}
 
+//Функция обработчика удаления карточки
+function addCardEventListener(card) {
+  const trashButton = card.querySelector('.photo-grid__trash')
+  trashButton.addEventListener('click', deleteCard);
+}
 
-// Функция открытия попапа 
+// Функция открытия попапа
 function openPopup(item) {
   item.classList.add('popup_opend');
 }
