@@ -6,4 +6,9 @@
   min-height: 19px;
 }
 
+.photo-grid__trash:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
 
