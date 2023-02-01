@@ -7,6 +7,7 @@ const jobAbout = document.querySelector('.profile__about');
 const nameInput = aboutPopup.querySelector('.popup__input_text_name');
 const jobInput = aboutPopup.querySelector('.popup__input_text_job');
 const profileAddButton = document.querySelector('.profile__add-button');
+const arrayPopup = Array.from(document.querySelectorAll('.popup'));
 
 // Константы попапа карточек
 const cardPopup = document.querySelector('.popup_name_card');
@@ -105,11 +106,14 @@ function addCardEventListener(card, link, name, alt) {
 // Функция открытия попапа
 function openPopup(item) {
   item.classList.add('popup_opend');
+  closeOverlayPopup(arrayPopup);
+  document.addEventListener('keydown', closeEscPopup);
 }
 
 //Функция закрытия попапа
 function closePopup(item) {
   item.classList.remove('popup_opend');
+  document.removeEventListener('keydown', closeEscPopup);
 }
 
 // Функция для добавления информации в поля и закрытия попапа
@@ -119,6 +123,25 @@ function handleFormSubmit(evt) {
   jobAbout.textContent = jobInput.value;
   closePopup(aboutPopup);
 };
+
+// Функция закрытия попапа кликом на оверлей
+function closeOverlayPopup (arrPopup) {
+  arrPopup.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      if (event.target === event.currentTarget) {
+        closePopup(item)
+      }
+    })
+  })
+}
+
+// Функция закрытия попапа по Esc
+function closeEscPopup (event) {
+  if (event.key === 'Escape') {
+    const item = document.querySelector('.popup_opend');
+    closePopup(item);
+  }
+}
 
 // Слушатели
 profileEditButton.addEventListener("click", () => {
