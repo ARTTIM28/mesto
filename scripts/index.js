@@ -1,4 +1,5 @@
 const aboutPopup = document.querySelector('.popup_name_profile');
+const aboutForm = aboutPopup.querySelector('.popup__form');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileCloseButton = document.querySelector('.popup__close-button');
 const formElement = document.querySelector('.popup__form');
@@ -31,27 +32,27 @@ const placeInput = document.querySelector('.popup__input_text_place');
 const linkInput = document.querySelector('.popup__input_text_link');
 
 
-function createCards({ name, link, alt }) {
+function createCard(item) {
   const card = cardsTemplate.querySelector('.photo-grid__item').cloneNode(true);
   const cardText = card.querySelector('.photo-grid__text');
-  cardText.textContent = name;
+  cardText.textContent = item.name;
   const cardImage = card.querySelector('.photo-grid__photo');
-  cardImage.src = link;
-  cardImage.alt = alt;
+  cardImage.src = item.link;
+  cardImage.alt = item.name;
 
-  addCardEventListener(card, link, name, alt);
+  addCardEventListeners(card, item);
 
   return card;
 }
 
-function renderCards() {
+function renderInitialCards() {
   initialCards.reverse().forEach(item => {
-    const cardHtml = createCards(item);
+    const cardHtml = createCard(item);
     addCard(cardHtml);
   });
 }
 
-renderCards()
+renderInitialCards()
 
 // Функция добавления новой карточки
 function addCard(card) {
@@ -61,23 +62,23 @@ function addCard(card) {
 // Функция добавления данных новой карточки из инпутов
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
-  const newCard = createCards({
+
+  const inputValue = {
     name: placeInput.value,
     link: linkInput.value
-  });
+  };
+  const newCard = createCard(inputValue);
 
   addCard(newCard);
   closePopup(cardPopup);
-
-  placeInput.value = '';
-  linkInput.value = '';
+  cardForm.reset();
 }
 
 // Функция зума карточки
-function zoomCard( name, link, alt ) {
-  imageZoomPopup.src = link;
-  imageZoomPopup.alt = alt;
-  textZoomPopup.textContent = name;
+function zoomCard(item) {
+  imageZoomPopup.src = item.link;
+  imageZoomPopup.alt = item.name;
+  textZoomPopup.textContent = item.name;
   openPopup(zoomPopup);
 }
 
@@ -92,7 +93,7 @@ function likeCard(item) {
 }
 
 //Функция обработчика событий карточки
-function addCardEventListener(card, link, name, alt) {
+function addCardEventListeners(card, item) {
   const trashButton = card.querySelector('.photo-grid__trash');
   trashButton.addEventListener('click', deleteCard);
 
@@ -100,13 +101,12 @@ function addCardEventListener(card, link, name, alt) {
   likeButton.addEventListener('click', likeCard);
 
   const zoomImage = card.querySelector('.photo-grid__photo');
-  zoomImage.addEventListener('click', () => zoomCard(name, link, alt));
+  zoomImage.addEventListener('click', () => zoomCard(item));
 }
 
 // Функция открытия попапа
 function openPopup(item) {
   item.classList.add('popup_opend');
-  closeOverlayPopup(arrayPopup);
   document.addEventListener('keydown', closeEscPopup);
 }
 
@@ -117,7 +117,7 @@ function closePopup(item) {
 }
 
 // Функция для добавления информации в поля и закрытия попапа
-function handleFormSubmit(evt) {
+function handleAboutFormSubmit(evt) {
   evt.preventDefault();
   nameTitle.textContent = nameInput.value;
   jobAbout.textContent = jobInput.value;
@@ -144,6 +144,7 @@ function closeEscPopup (event) {
 }
 
 // Слушатели
+  closeOverlayPopup(arrayPopup);
 profileEditButton.addEventListener("click", () => {
   openPopup(aboutPopup);
   nameInput.value = nameTitle.textContent
@@ -166,7 +167,5 @@ zoomPopupCloseButton.addEventListener("click", () => {
   closePopup(zoomPopup);
 });
 
-formElement.addEventListener('submit', handleFormSubmit);
+aboutForm.addEventListener('submit', handleAboutFormSubmit);
 formNewElement.addEventListener('submit', handleNewCardFormSubmit);
-
-

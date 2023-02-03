@@ -4,6 +4,8 @@
   right: 20px;
   max-width: 18px;
   min-height: 19px;
+  background-color: rgba(0, 0, 0, .2);
+  color: white;
 }
 
 .photo-grid__trash:hover {

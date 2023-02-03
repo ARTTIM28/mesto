@@ -2,3 +2,7 @@
   max-width: 282px;
   height: 282px;
 }
+
+.photo-grid__photo:hover {
+  cursor:zoom-in;
+}

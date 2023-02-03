@@ -1,12 +1,3 @@
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_text_error',
-  errorClass: 'popup__error_visible'
-};
-
 //показывает ошибки
 const showInputError = (formElement, inputElement, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -50,6 +41,13 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   }
 }
 
+//Блокировка кнопки
+function disableButton(formElement, config) {
+  const formButton = formElement.querySelector(config.submitButtonSelector);
+  formButton.classList.add(config.inactiveButtonClass);
+  formButton.setAttribute('disabled', true);
+}
+
 // Функция добавит обработчики сразу всем полям формы
 const setEventListeners = (formElement, config) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
@@ -69,14 +67,11 @@ const setEventListeners = (formElement, config) => {
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-
+    formElement.addEventListener('submit', () => {
+      disableButton(cardForm, config)
+    })
     setEventListeners(formElement, config);
   });
 }
 
 enableValidation(config);
-
-
