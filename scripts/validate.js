@@ -30,22 +30,31 @@ const hasInvalidInput = (inputList) => {
   });
 }
 
+//Блокировать кнопку отправки
+function disableSubmitButton(buttonElement, config){
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+
+//Сделать активной кнопку отправки
+function enableSubmitButton(buttonElement, config){
+  buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
+}
+
 //добать класс кнопке
 const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    disableSubmitButton(buttonElement, config)
   } else {
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+    enableSubmitButton(buttonElement, config)
   }
 }
 
 //Блокировка кнопки
-function disableButton(formElement, config) {
+function disableFormSubmitButton(formElement, config) {
   const formButton = formElement.querySelector(config.submitButtonSelector);
-  formButton.classList.add(config.inactiveButtonClass);
-  formButton.setAttribute('disabled', true);
+  disableSubmitButton(formButton, config);
 }
 
 // Функция добавит обработчики сразу всем полям формы
@@ -68,7 +77,7 @@ const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', () => {
-      disableButton(cardForm, config)
+      disableFormSubmitButton(cardForm, config)
     })
     setEventListeners(formElement, config);
   });

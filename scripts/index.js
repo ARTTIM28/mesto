@@ -2,7 +2,6 @@ const aboutPopup = document.querySelector('.popup_name_profile');
 const aboutForm = aboutPopup.querySelector('.popup__form');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileCloseButton = document.querySelector('.popup__close-button');
-const formElement = document.querySelector('.popup__form');
 const nameTitle = document.querySelector('.profile__title');
 const jobAbout = document.querySelector('.profile__about');
 const nameInput = aboutPopup.querySelector('.popup__input_text_name');
@@ -125,7 +124,7 @@ function handleAboutFormSubmit(evt) {
 };
 
 // Функция закрытия попапа кликом на оверлей
-function closeOverlayPopup (arrPopup) {
+function closeOverlayPopups (arrPopup) {
   arrPopup.forEach((item) => {
     item.addEventListener('click', (event) => {
       if (event.target === event.currentTarget) {
@@ -144,7 +143,7 @@ function closeEscPopup (event) {
 }
 
 // Слушатели
-  closeOverlayPopup(arrayPopup);
+  closeOverlayPopups(arrayPopup);
 profileEditButton.addEventListener("click", () => {
   openPopup(aboutPopup);
   nameInput.value = nameTitle.textContent
