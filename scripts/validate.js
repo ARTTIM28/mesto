@@ -77,7 +77,7 @@ const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', () => {
-      disableFormSubmitButton(cardForm, config)
+      disableFormSubmitButton(formElement, config)
     })
     setEventListeners(formElement, config);
   });
