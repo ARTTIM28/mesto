@@ -1,5 +1,9 @@
+import Card from './Card.js';
+import { initialCards, config } from './constants.js';
+import FormValidator from './FormValidator.js';
+
 const aboutPopup = document.querySelector('.popup_name_profile');
-const aboutForm = aboutPopup.querySelector('.popup__form');
+const aboutForm = document.querySelector('.popup__form');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileCloseButton = document.querySelector('.popup__close-button');
 const nameTitle = document.querySelector('.profile__title');
@@ -21,9 +25,7 @@ const textZoomPopup = document.querySelector('.popup__text')
 const zoomPopupCloseButton = zoomPopup.querySelector('.popup__close-button');
 
 // Константы начальные карточки
-const cardsTemplate = document.querySelector('#photo-grid').content;
 const cardsContainer = document.querySelector('.photo-grid__items');
-const card = cardsTemplate.querySelector('.photo-grid__item').cloneNode(true);
 
 // Константы новых карточек
 const formNewElement = document.querySelector('.popup__form_newcard');
@@ -31,19 +33,21 @@ const placeInput = document.querySelector('.popup__input_text_place');
 const linkInput = document.querySelector('.popup__input_text_link');
 
 
+// константы валидации
+const validationAbout = new FormValidator(config, aboutForm);
+validationAbout.enableValidation();
+
+const validationCard = new FormValidator(config, cardForm);
+validationCard.enableValidation();
+
+//Функция создания карточки на основе класса
 function createCard(item) {
-  const card = cardsTemplate.querySelector('.photo-grid__item').cloneNode(true);
-  const cardText = card.querySelector('.photo-grid__text');
-  cardText.textContent = item.name;
-  const cardImage = card.querySelector('.photo-grid__photo');
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-
-  addCardEventListeners(card, item);
-
-  return card;
+  const card = new Card(item, '#photo-grid');
+  const cardsTemplate = card.generateCard();
+  return cardsTemplate
 }
 
+// Начальные карточки
 function renderInitialCards() {
   initialCards.reverse().forEach(item => {
     const cardHtml = createCard(item);
@@ -74,33 +78,11 @@ function handleNewCardFormSubmit(evt) {
 }
 
 // Функция зума карточки
-function zoomCard(item) {
-  imageZoomPopup.src = item.link;
-  imageZoomPopup.alt = item.name;
-  textZoomPopup.textContent = item.name;
+function zoomCard(name, link) {
+  imageZoomPopup.src = link;
+  imageZoomPopup.alt = name;
+  textZoomPopup.textContent = name;
   openPopup(zoomPopup);
-}
-
-// Функция удаления карточки
-function deleteCard(evt) {
-  evt.target.closest('.photo-grid__item').remove();
-}
-
-//Функция лайка
-function likeCard(item) {
-  item.target.classList.toggle('photo-grid__element_active');
-}
-
-//Функция обработчика событий карточки
-function addCardEventListeners(card, item) {
-  const trashButton = card.querySelector('.photo-grid__trash');
-  trashButton.addEventListener('click', deleteCard);
-
-  const likeButton = card.querySelector('.photo-grid__element');
-  likeButton.addEventListener('click', likeCard);
-
-  const zoomImage = card.querySelector('.photo-grid__photo');
-  zoomImage.addEventListener('click', () => zoomCard(item));
 }
 
 // Функция открытия попапа
@@ -168,3 +150,5 @@ zoomPopupCloseButton.addEventListener("click", () => {
 
 aboutForm.addEventListener('submit', handleAboutFormSubmit);
 formNewElement.addEventListener('submit', handleNewCardFormSubmit);
+
+export { zoomCard };
