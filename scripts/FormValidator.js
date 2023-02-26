@@ -60,11 +60,6 @@ class FormValidator {
     }
   }
 
-  //Блокировка кнопки
-  _disableFormSubmitButton() {
-    this._disableSubmitButton();
-  }
-
   // Функция добавит обработчики сразу всем полям формы
   _setEventListeners() {
     this._toggleButtonState();
@@ -80,7 +75,7 @@ class FormValidator {
   //  Функция добавления валидации для форм
   enableValidation() {
     this._formElement.addEventListener('submit', () => {
-      this._disableFormSubmitButton();
+      this._disableSubmitButton();
     });
     this._setEventListeners();
   };
